@@ -1,3 +1,4 @@
+//$_FOR_ROCKCHIP_RBOX_$
 /*
  * main.c - Point-to-Point Protocol main module
  *
@@ -847,15 +848,21 @@ reopen_log()
 /*
  * Create a file containing our process ID.
  */
+ //$_rbox_$_modify_$_chenzhi_20121116
 static void
 create_pidfile(pid)
     int pid;
 {
-#ifndef ANDROID_CHANGES
+//#ifndef ANDROID_CHANGES
     FILE *pidfile;
 
+#if 1
+    slprintf(pidfilename, sizeof(pidfilename), "%s%s.pid",
+	     "/data/misc/ppp/", ifname);
+#else
     slprintf(pidfilename, sizeof(pidfilename), "%s%s.pid",
 	     _PATH_VARRUN, ifname);
+#endif
     if ((pidfile = fopen(pidfilename, "w")) != NULL) {
 	fprintf(pidfile, "%d\n", pid);
 	(void) fclose(pidfile);
@@ -863,7 +870,7 @@ create_pidfile(pid)
 	error("Failed to create pid file %s: %m", pidfilename);
 	pidfilename[0] = 0;
     }
-#endif
+//#endif
 }
 
 void

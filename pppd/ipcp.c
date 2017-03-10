@@ -1,3 +1,4 @@
+//$_FOR_ROCKCHIP_RBOX_$
 /*
  * ipcp.c - PPP IP Control Protocol.
  *
@@ -1992,11 +1993,12 @@ ipcp_script(script)
 /*
  * create_resolv - create the replacement resolv.conf file
  */
+ //$_rbox_$_modify_$_chenzhi_20121116
 static void
 create_resolv(peerdns1, peerdns2)
     u_int32_t peerdns1, peerdns2;
 {
-#ifndef ANDROID_CHANGES
+//#ifndef ANDROID_CHANGES
     FILE *f;
 
     f = fopen(_PATH_RESOLV, "w");
@@ -2015,7 +2017,7 @@ create_resolv(peerdns1, peerdns2)
 	error("Write failed to %s: %m", _PATH_RESOLV);
 
     fclose(f);
-#endif
+//#endif
 }
 
 /*
